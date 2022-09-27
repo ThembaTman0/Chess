@@ -1,7 +1,7 @@
 #Screen Dimensions
 
-WIDTH = 800
-HEIGHT = 800
+WIDTH = 700
+HEIGHT = 700
 
 #Board Dimensions
 
