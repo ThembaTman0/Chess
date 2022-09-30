@@ -5,6 +5,7 @@ from board import Board
 from piece import Piece
 from dragger import Dragger
 
+# THE RENDER CLASS
 class Game:
 
     def __init__(self):
@@ -37,9 +38,12 @@ class Game:
                         
                         # all pieces except dragger piece
                         if piece is not self.dragger.piece:
+                            piece.set_texture(size=80)
                             # Load image of the piece
                             img = pygame.image.load(piece.texture)
                             # center the piece
                             img_center= col * SQSIZE + SQSIZE// 2, row * SQSIZE + SQSIZE // 2
                             piece.texture_rect= img.get_rect(center=img_center)
                             surface.blit(img, piece.texture_rect)
+
+
