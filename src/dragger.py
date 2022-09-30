@@ -13,6 +13,19 @@ class Dragger:
         self.initial_row = 0
         self.initial_col = 0
 
+
+    def update_blit(self, surface):
+        # resize the dragged piece
+        self.piece.set_texture(size=80)
+        texture = self.piece.texture
+        # image
+        img=pygame.image.load(texture)
+        # center the piece in the middle of mouse cursor
+        img_center=(self.mouseX, self.mouseY)
+        self.piece.texture_rect = img.get_rect(center=img_center)
+        # blit
+        surface.blit(img, self.piece.texture_rect)
+
     # Update the mouse movement
     # pos is a tuple i.e pos=(xcoor, ycoor)
     def update_mouse(self,pos):

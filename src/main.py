@@ -26,6 +26,8 @@ class Main:
             game.show_bg(screen)
             game.show_pieces(screen)
 
+            if dragger.dragging:
+                dragger.update_blit(screen)
             for event in pygame.event.get():
                 # check if mouse is clicked
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -37,8 +39,8 @@ class Main:
 
 
                     # if the clicked square has a piece?
-                    if board.squares[clicked_row][clicked_row].has_piece():
-                        piece= board.squares[clicked_row][clicked_row].piece
+                    if board.squares[clicked_row][clicked_col].has_piece():
+                        piece= board.squares[clicked_row][clicked_col].piece
                         # if the piece is dragged save its coord
                         dragger.save_initial(event.pos)
                         dragger.drag_piece(piece)
@@ -47,10 +49,12 @@ class Main:
                     
                 # check if mouse is moving
                 elif event.type == pygame.MOUSEMOTION:
-                    pass
+                    if dragger.dragging:
+                        dragger.update_mouse(event.pos)
+                        dragger.update_blit(screen)
                 
                 elif event.type == pygame.MOUSEBUTTONUP:
-                    pass
+                    dragger.undrag_piece()
                 # Close/Quit the GUI/Application
                 elif event.type == pygame.QUIT:
                     pygame.quit()
