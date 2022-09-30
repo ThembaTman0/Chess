@@ -6,6 +6,7 @@ from game import Game
 
 class Main:
     def __init__(self):
+        # Define the game window/ GUI
         pygame.init()
         self.screen =pygame.display.set_mode((WIDTH,HEIGHT))
         pygame.display.set_caption('Chess')
@@ -14,13 +15,44 @@ class Main:
     def mainloop(self):
         game=self.game
         screen=self.screen
+        board=self.game.board
+        dragger = self.game.dragger
+
 
         while True:
+            # Render 
+            # Game.py renders the objects 
+            # main.py outputs the rendered object
             game.show_bg(screen)
             game.show_pieces(screen)
-            
+
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                # check if mouse is clicked
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    dragger.update_mouse(event.pos)
+
+                    clicked_row = dragger.mouseY // SQSIZE
+                    clicked_col = dragger.mouseX // SQSIZE
+
+
+
+                    # if the clicked square has a piece?
+                    if board.squares[clicked_row][clicked_row].has_piece():
+                        piece= board.squares[clicked_row][clicked_row].piece
+                        # if the piece is dragged save its coord
+                        dragger.save_initial(event.pos)
+                        dragger.drag_piece(piece)
+
+
+                    
+                # check if mouse is moving
+                elif event.type == pygame.MOUSEMOTION:
+                    pass
+                
+                elif event.type == pygame.MOUSEBUTTONUP:
+                    pass
+                # Close/Quit the GUI/Application
+                elif event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit() 
             
