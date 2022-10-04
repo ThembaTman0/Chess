@@ -23,11 +23,11 @@ class Square:
     def isempty_or_rival(self, color):
        return self.isempty or self.has_rival_piece(color)
     # Check if row or col is outsiede the column
-    @staticmethod
     # *args means you can recieve as many arguments as possible
+    @staticmethod
     def in_range(*args):
         for arg in args:
-            if arg < 0 or arg < 7:
+            if arg < 0 or arg > 7:
                 return False
             
         return True

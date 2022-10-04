@@ -37,8 +37,6 @@ class Main:
                     clicked_row = dragger.mouseY // SQSIZE
                     clicked_col = dragger.mouseX // SQSIZE
 
-
-
                     # if the clicked square has a piece?
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece= board.squares[clicked_row][clicked_col].piece
@@ -68,12 +66,7 @@ class Main:
                 elif event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit() 
-            
-
-
-
-
-
+        
             pygame.display.update()
 
 main = Main()
