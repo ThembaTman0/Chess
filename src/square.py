@@ -21,7 +21,7 @@ class Square:
         return self.has_piece() and self.piece.color != color
 
     def isempty_or_rival(self, color):
-       return self.isempty or self.has_rival_piece(color)
+        return self.isempty() or self.has_rival_piece(color)
     # Check if row or col is outsiede the column
     # *args means you can recieve as many arguments as possible
     @staticmethod
