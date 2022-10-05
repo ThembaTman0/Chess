@@ -83,7 +83,7 @@ class Board:
         # Knights
         self.squares[row_other][1]=Square(row_other, 1, Knight(color))
         self.squares[row_other][6]=Square(row_other, 6, Knight(color))
-
+        self.squares[3][3]=Square(3, 3, Knight(color))
         # Bishops
         self.squares[row_other][2]=Square(row_other, 2, Bishop(color))
         self.squares[row_other][5]=Square(row_other, 5, Bishop(color))
