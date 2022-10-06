@@ -19,12 +19,12 @@ class Board:
             # Vertical moves
             start = row + piece.dir
             end = row + ( piece.dir * (1 + steps))
-            for move_row in range(start,  end, piece.dir):
-                if Square.in_range(move_row):
-                    if self.squares[move_row][col].isempty():
+            for possible_move_row in range(start,  end, piece.dir):
+                if Square.in_range(possible_move_row):
+                    if self.squares[possible_move_row][col].isempty():
                         # Create initial and final move squares
                         initial= Square(row, col)
-                        final= Square(move_row, col)
+                        final= Square(possible_move_row, col)
 
                         # Create a new move
                         move=Move(initial, final)
@@ -37,6 +37,17 @@ class Board:
                     break
 
             # Diagonal moves
+            possible_move_row = row + piece.dir
+            possible_move_cols = [col-1, col+1]
+            for possible_move_col in possible_move_cols:
+                if Square.in_range(possible_move_row, possible_move_col):
+                    if self.squares[possible_move_row][possible_move_col].has_enemy_piece(piece.color):
+                        initial= Square(row, col)
+                        final= Square(possible_move_row, possible_move_col)
+
+                        # Create a new move
+                        move=Move(initial, final)
+                        piece.add_move(move)
 
         def knight_moves():
             # 8 possible moves if knight is at the center
@@ -55,7 +66,7 @@ class Board:
                 possible_move_row, possible_move_col = possible_move
                 # check is square is inside or out side the board
                 if Square.in_range(possible_move_row, possible_move_col):
-                    if self.squares[possible_move_row][possible_move_col].isempty_or_rival(piece.color):
+                    if self.squares[possible_move_row][possible_move_col].isempty_or_enemy(piece.color):
                         # create square of the new move
                         initial =Square(row, col)
                         final = Square(possible_move_row, possible_move_col)
@@ -102,6 +113,7 @@ class Board:
         # Pawns
         for col in range(COLS):
             self.squares[row_pawn][col] =  Square(row_pawn, col, Pawn(color))
+        self.squares[5][1] =  Square(5, 1, Pawn(color))
 
         # Knights
         self.squares[row_other][1]=Square(row_other, 1, Knight(color))
