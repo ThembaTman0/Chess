@@ -77,6 +77,9 @@ class Board:
                         # append new valid move
                         piece.add_move(move)
 
+        def straightline_moves(incrs):
+            pass
+
         if isinstance(piece, Pawn):
             pawn_moves()
 
@@ -84,16 +87,16 @@ class Board:
             knight_moves()
 
         elif isinstance(piece, Bishop):
-            pass
+            straightline_moves()
 
         elif isinstance(piece, Rook):
-            pass
+            straightline_moves()
 
         elif isinstance(piece, Queen):
-            pass
+            straightline_moves()
 
         elif isinstance(piece, King):
-            pass
+            straightline_moves()
 
 
 
