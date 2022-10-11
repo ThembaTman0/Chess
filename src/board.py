@@ -101,6 +101,10 @@ class Board:
                             # append a new move
                             piece.add_move(move)
                             break
+                        
+                        # Has team piece
+                        if self.squares[possible_move_row][possible_move_col].has_team_piece(piece.color):
+                            break
                     # If not in range
                     else: break 
                     # Increaments     
@@ -174,12 +178,13 @@ class Board:
         self.squares[row_other][2]=Square(row_other, 2, Bishop(color))
         self.squares[row_other][5]=Square(row_other, 5, Bishop(color))
 
+
         # Bishops
         self.squares[row_other][0]=Square(row_other, 0, Rook(color))
         self.squares[row_other][7]=Square(row_other, 7, Rook(color))
-
+        self.squares[5][5]=Square(5, 5, Rook(color))
         # Queen
         self.squares[row_other][3]=Square(row_other, 3, Queen(color))
-   
+        self.squares[4][3]=Square(4, 3, Queen(color))
         # King
         self.squares[row_other][4]=Square(row_other, 4, King(color))
