@@ -54,7 +54,7 @@ class Game:
             # loop through all possible moves
             for move in piece.moves:
                 #color
-                color ='#00BFFF' if (move.final.row + move.final.col) % 2 == 0 else '#0000FF'
+                color ='#C86464' if (move.final.row + move.final.col) % 2 == 0 else '#C84646'
                 #rect
                 rect = (move.final.col * SQSIZE, move.final.row * SQSIZE, SQSIZE, SQSIZE)
                 #blit

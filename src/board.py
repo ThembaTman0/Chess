@@ -1,3 +1,4 @@
+from shutil import move
 from typing import final
 from const import *
 from square import Square
@@ -83,20 +84,29 @@ class Board:
                 possible_move_row = row + row_incr
                 possible_move_col = col + col_incr
 
-                # while this is True
-                if Square.in_range(possible_move_row, possible_move_col):
-                    # create squares of the possible new move
-                    initial = Square(row, col)
-                    
-                    # Empty (Can i move)
-                    if self.squares[possible_move_row][possible_move_col].isempty():
-                        # create a new move
-                        pass
-                    
-                    # has enemy piece ( There is an enemy piece breake the while true loop)
-                    if self.squares[possible_move_row][possible_move_col].has_enemy_piece(piece.color):
-                        # create a new move
-                        pass
+                while True:
+                    if Square.in_range(possible_move_row, possible_move_col):
+                        # create squares of the possible new move
+                        initial = Square(row, col)
+                        final = Square(possible_move_row, possible_move_col)
+                        # create possible new move
+                        move = Move(initial, final)
+                        # Empty (Can i move)
+                        if self.squares[possible_move_row][possible_move_col].isempty():
+                            # append a new move
+                            piece.add_move(move)
+                        
+                        # has enemy piece ( There is an enemy piece breake the while true loop)
+                        if self.squares[possible_move_row][possible_move_col].has_enemy_piece(piece.color):
+                            # append a new move
+                            piece.add_move(move)
+                            break
+                    # If not in range
+                    else: break 
+                    # Increaments     
+                    possible_move_row = possible_move_row + row_incr 
+                    possible_move_col =  possible_move_col + col_incr
+
         if isinstance(piece, Pawn):
             pawn_moves()
 
