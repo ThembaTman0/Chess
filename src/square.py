@@ -4,6 +4,8 @@ class Square:
         self.row=row
         self.col=col
         self.piece=piece
+    def __eq__(self, other):
+        return self.row == other.row and self.col == other.col
     # Check the squares if they have any pieces
     # Look for a piece
     def has_piece(self):

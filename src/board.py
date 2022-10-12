@@ -18,8 +18,8 @@ class Board:
         final = move.final
 
         # console board move update
-        self.squares[initial.row][initial.col] = None
-        self.squares[final.row][final.col] = piece
+        self.squares[initial.row][initial.col].piece = None
+        self.squares[final.row][final.col].piece = piece
 
         # move
         piece.moved = True
